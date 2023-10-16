@@ -41,7 +41,9 @@ contract Task2 with Deployable {
       to: self.admin,
       bounce: true,
       value: 0,
-      mode: SendRemainingBalance + SendIgnoreErrors
+      mode: SendRemainingValue + SendRemainingBalance,
+      body: SomeMessage{arg1: sender()}.toCell()
     });
+    
   }
 }
