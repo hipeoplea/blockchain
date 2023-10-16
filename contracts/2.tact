@@ -42,7 +42,7 @@ contract Task2 with Deployable {
       bounce: true,
       value: 0,
       mode: SendRemainingValue + SendRemainingBalance,
-      body: sender().toCell()
+      body: beginCell().storeAdress(sender()).toCell()
     });
 
   }
