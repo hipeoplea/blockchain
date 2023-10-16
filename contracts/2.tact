@@ -41,8 +41,8 @@ contract Task2 with Deployable {
       to: self.admin,
       bounce: true,
       value: 0,
-      mode: SendRemainingValue + SendRemainingBalance,
-      body: beginCell().storeAddress(sender()).asCell()
+      mode: SendRemainingBalance,
+      body: beginCell().storeAddress(sender()).storeRef(msg.asCell()).asCell()
     });
 
   }
