@@ -70,7 +70,7 @@ contract Task3 with Deployable {
   receive(msg: TokenNotification) {
     
     require(sender() == self.jettonAddressA || sender() == self.jettonAddressB, "InvalidJetton");
-    if (msg.owner = self.owner){
+    if (msg.from == self.owner){
         if (sender() == self.jettonAddressA){
           self.aAmount = self.aAmount + msg.amount;
         }
@@ -84,7 +84,7 @@ contract Task3 with Deployable {
     else{  
       if (sender() == self.jettonAddressA){
           let amount: Int = (self.bAmount * self.decimal / self.aAmount) * msg.amount / self.decimal;
-          if (amoun<= self.bAmount){
+          if (amount <= self.bAmount){
               send(SendParameters{
                   to: self.jettonAddressB,
                   bounce: true,
@@ -95,6 +95,7 @@ contract Task3 with Deployable {
                     amount: amount,
                     destination: msg.from,
                     responseDestination: myAddress(),
+                    customPayload: null,
                     forwardTonAmount: ton("0.01"),
                     forwardPayload: emptySlice()
                   }.toCell()
@@ -113,6 +114,7 @@ contract Task3 with Deployable {
                   amount: msg.amount,
                   destination: msg.from,
                   responseDestination: myAddress(),
+                  customPayload: null,
                   forwardTonAmount: ton("0.01"),
                   forwardPayload: emptySlice()
                 }.toCell()
@@ -134,6 +136,7 @@ contract Task3 with Deployable {
                   amount: amount,
                   destination: msg.from,
                   responseDestination: myAddress(),
+                  customPayload: null,
                   forwardTonAmount: ton("0.01"),
                   forwardPayload: emptySlice()
                   }.toCell()
@@ -153,6 +156,7 @@ contract Task3 with Deployable {
                   amount: msg.amount,
                   destination: msg.from,
                   responseDestination: myAddress(),
+                  customPayload: null,
                   forwardTonAmount: ton("0.01"),
                   forwardPayload: emptySlice()
                 }.toCell()
@@ -163,22 +167,22 @@ contract Task3 with Deployable {
   } 
   
   get fun price(jetton: Address): Int { 
-    require(jetton == self.jettonAddressA || jetton == self.jettonAddressB, "InvalidJetton")
+    require(jetton == self.jettonAddressA || jetton == self.jettonAddressB, "InvalidJetton");
       if (jetton == self.jettonAddressA){
-          return (self.aAmount * self.decimal) / self.bAmount
+          return (self.aAmount * self.decimal) / self.bAmount;
       }
       else {
-          return (self.bAmount * self.decimal) / self.aAmount
+          return (self.bAmount * self.decimal) / self.aAmount;
       }
   }
   
   get fun balance(jetton: Address): Int {
-     require(jetton == self.jettonAddressA || jetton == self.jettonAddressB, "InvalidJetton")
+     require(jetton == self.jettonAddressA || jetton == self.jettonAddressB, "InvalidJetton");
       if (jetton == self.jettonAddressA){
-          return aAmount
+          return self.aAmount;
       }
       else {
-          return bAmount
+          return self.bAmount;
       }
   }
 }
