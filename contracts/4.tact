@@ -131,7 +131,7 @@ contract Task4 with Deployable {
   }
 
   get fun time(): Int {
-    return self.ime_lost - now();
+    return self.time_lost - now();
   }
 
   get fun nft(): Address? {
