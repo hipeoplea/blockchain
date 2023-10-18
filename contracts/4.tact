@@ -101,7 +101,7 @@ contract Task4 with Deployable {
         to: sender(),
         bounce: true,
         value: 0,
-        mode: 0 + SendRemainingValue,
+        mode: 0 + SendRemainingBalance,
         body: Transfer{
           queryId: 0,
           newOwner: self.owner,
