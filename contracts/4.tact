@@ -132,3 +132,4 @@ contract Task4 with Deployable {
   get fun owner(): Address? {
     return self.owner;
   }
+}
