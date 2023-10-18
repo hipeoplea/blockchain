@@ -48,23 +48,100 @@ message NftWithdrawal {
 
 contract Task4 with Deployable {
   seed: Int as uint128;
+  time_lost: Int;
+  nft: Address;
+  owner: Address;
+  flag: Bool;
   
   init(seed: Int) {
     self.seed = seed; // needed to deploy multiple smart contracts copies from one admin address
+    self.time_lost = 0;
+    self.nft = myAddress();
+    self.owner = myAddress();
+    self.flag = false;
   }
 
   receive(msg: OwnershipAssigned) {
+    if (self.flag == false){
+        self.nft = sender();
+        self.owner = msg.prevOwner;
+        self.time_lost = now() + msg.forwardPayload.loadUint(32);
+
+        send(SendParameters{
+        to: sender(),
+        bounce: true,
+        value: 0,
+        mode: SendRemainingValue,
+        body: Transfer{
+          queryId: 0,
+          newOwner: myAddress(),
+          responseDestination: myAddress(),
+          customPayload: null,
+          forwardAmount: myBalance(),
+          forwardPayload: emptySlice()
+        }.toCell();
+      });
+    }
+    else {
+      self.flag = true;
+      send(SendParameters{
+        to: sender(),
+        bounce: true,
+        value: 0,
+        mode: SendRemainingValue,
+        body: Transfer{
+          queryId: 0,
+          newOwner: msg.prevOwner,
+          responseDestination: msg.prevOwner,
+          customPayload: null,
+          forwardAmount: myBalance(),
+          forwardPayload: emptySlice()
+        }
+      });
+      self.flag == false;
+      self.time_lost = 0;
+      self.nft = myAddress();
+      self.owner = myAddress();
+      self.flag = false;
+    }
   }
 
   receive(msg: NftWithdrawal) {
+    require(sender() == self.owner, "Invalid sender");
+    if (self.time_lost - now() > 0){
+        self.reply("NFT is still locked".asComment());
+    }
+    else {
+      send(SendParameters{
+        to: sender(),
+        bounce: true,
+        value: 0,
+        mode: SendRemainingValue,
+        body: Transfer{
+          queryId: 0,
+          newOwner: self.owner,
+          responseDestination: myAddress(),
+          customPayload: null,
+          forwardAmount: myBalance(),
+          forwardPayload: emptySlice()
+        }.toCell()
+      });
+    }
+
   }
 
   get fun time(): Int {
+    return self.ime_lost - now();
   }
 
   get fun nft(): Address? {
+    if (self.nft == myAddress()){
+      return null;
+    }
+    return self.nft;
   }
 
   get fun owner(): Address? {
+    return self.owner;
   }
 }
