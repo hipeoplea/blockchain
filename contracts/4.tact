@@ -111,14 +111,13 @@ contract Task4 with Deployable {
           forwardPayload: emptySlice()
         }.toCell()
       });
-            self.flag == false;
       self.nft = myAddress();
       self.owner = myAddress();
       self.flag = false;
     }
   }
   get fun time(): Int {
-    if (self.time_lost == 0){
+    if (self.flag == 0){
       return 0;
     }
     return self.time_lost - now();
