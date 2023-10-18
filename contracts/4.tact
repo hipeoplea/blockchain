@@ -105,7 +105,7 @@ contract Task4 with Deployable {
         body: Transfer{
           queryId: 0,
           newOwner: self.owner,
-          responseDestination: self.owner,
+          responseDestination: sender(),
           customPayload: null,
           forwardAmount: 0,
           forwardPayload: emptySlice()
@@ -118,7 +118,7 @@ contract Task4 with Deployable {
     }
   }
   get fun time(): Int {
-    if (self.flag == false){
+    if (self.time_lost == 0){
       return 0;
     }
     return self.time_lost - now();
@@ -130,10 +130,5 @@ contract Task4 with Deployable {
     return self.nft;
   }
   get fun owner(): Address? {
-    if (self.owner == myAddress()) {
-return null;
-    }
-
     return self.owner;
   }
-}
