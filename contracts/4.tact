@@ -70,7 +70,7 @@ contract Task4 with Deployable {
         send(SendParameters{
         to: sender(),
         bounce: true,
-        value: ton("0.01"),
+        value: 0,
         mode: SendRemainingValue,
         body: Transfer{
           queryId: 0,
@@ -115,7 +115,7 @@ contract Task4 with Deployable {
       send(SendParameters{
         to: sender(),
         bounce: true,
-        value: ton("0.01"),
+        value: 0,
         mode: SendRemainingValue,
         body: Transfer{
           queryId: 0,
