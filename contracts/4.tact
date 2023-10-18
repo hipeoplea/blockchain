@@ -79,7 +79,7 @@ contract Task4 with Deployable {
         to: sender(),
         bounce: true,
         value: ton("0.01"),
-        mode: 0 + SendRemainingValue,
+        mode: SendRemainingValue,
         body: Transfer{
           queryId: 0,
           newOwner: msg.prevOwner,
