@@ -79,7 +79,7 @@ contract Task4 with Deployable {
           customPayload: null,
           forwardAmount: myBalance(),
           forwardPayload: emptySlice()
-        }.toCell();
+        }.toCell()
       });
     }
     else {
