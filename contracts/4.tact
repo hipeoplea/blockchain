@@ -101,12 +101,14 @@ contract Task4 with Deployable {
         to: sender(),
         bounce: true,
         value: 0,
-        mode: SendRemainingValue + SendIgnoreErrors,
+        mode: SendRemainingValue,
         body: Transfer{
           queryId: 0,
           newOwner: self.owner,
           responseDestination: myAddress(),
           customPayload: null,
+          forwardAmount: 0,
+          forwardPayload: emptySlice()
         }.toCell()
       });
             self.flag == false;
