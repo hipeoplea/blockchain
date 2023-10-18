@@ -131,14 +131,11 @@ contract Task4 with Deployable {
   }
 
   get fun time(): Int {
-    return 0;
+    return self.time_lost - now();
   }
 
   get fun nft(): Address? {
-    if (self.nft == myAddress()){
-      return null;
-    }
-    return self.nft;
+    return 0;
   }
 
   get fun owner(): Address? {
