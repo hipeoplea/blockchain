@@ -111,6 +111,7 @@ contract Task4 with Deployable {
           forwardPayload: emptySlice()
         }.toCell()
       });
+      self.time_lost = 0;
       self.nft = myAddress();
       self.owner = myAddress();
       self.flag = false;
@@ -129,6 +130,10 @@ contract Task4 with Deployable {
     return self.nft;
   }
   get fun owner(): Address? {
+    if (self.owner == myAddress()) {
+return null;
+    }
+
     return self.owner;
   }
 }
