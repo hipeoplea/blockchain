@@ -117,7 +117,7 @@ contract Task4 with Deployable {
           newOwner: self.owner,
           responseDestination: myAddress(),
           customPayload: null,
-          forwardAmount: myBalance(),
+          forwardAmount: context().value,
           forwardPayload: emptySlice()
         }.toCell()
       });
@@ -135,7 +135,10 @@ contract Task4 with Deployable {
   }
 
   get fun nft(): Address? {
-    return null;
+    if (self.nft == myAddress()){
+      return null;
+    }
+    return self.nft;
   }
 
   get fun owner(): Address? {
