@@ -96,7 +96,7 @@ contract Task4 with Deployable {
           customPayload: null,
           forwardAmount: myBalance(),
           forwardPayload: emptySlice()
-        }
+        }.toCell()
       });
       self.flag == false;
       self.time_lost = 0;
