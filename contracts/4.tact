@@ -1,3 +1,5 @@
+
+
 import "@stdlib/deploy";
 /*
   TASK 4 - NFT locker
@@ -79,7 +81,7 @@ contract Task4 with Deployable {
         to: sender(),
         bounce: true,
         value: ton("0.01"),
-        mode: SendRemainingBalance,
+        mode: SendRemainingValue,
         body: Transfer{
           queryId: 0,
           newOwner: msg.prevOwner,
@@ -94,14 +96,14 @@ contract Task4 with Deployable {
   receive(msg: NftWithdrawal) {
     require(sender() == self.owner, "Invalid sender");
     if (self.time_lost - now() > 0){
-        self.reply("NFT is still locket".asComment());
+        self.reply("NFT is still locked".asComment());
     }
     else {
       send(SendParameters{
         to: sender(),
         bounce: true,
         value: 0,
-        mode: 0 + SendRemainingValue,
+        mode: 0 + SendRemainingBalance,
         body: Transfer{
           queryId: 0,
           newOwner: self.owner,
