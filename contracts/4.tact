@@ -98,11 +98,6 @@ contract Task4 with Deployable {
           forwardPayload: emptySlice()
         }.toCell()
       });
-      self.flag == false;
-      self.time_lost = 0;
-      self.nft = myAddress();
-      self.owner = myAddress();
-      self.flag = false;
     }
   }
 
@@ -115,7 +110,7 @@ contract Task4 with Deployable {
       send(SendParameters{
         to: sender(),
         bounce: true,
-        value: 0,
+        value: ton("0.01"),
         mode: SendRemainingValue,
         body: Transfer{
           queryId: 0,
@@ -126,6 +121,11 @@ contract Task4 with Deployable {
           forwardPayload: emptySlice()
         }.toCell()
       });
+      self.flag == false;
+      self.time_lost = 0;
+      self.nft = myAddress();
+      self.owner = myAddress();
+      self.flag = false;
     }
 
   }
