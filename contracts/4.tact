@@ -112,13 +112,15 @@ contract Task4 with Deployable {
         }.toCell()
       });
             self.flag == false;
-      self.time_lost = 0;
       self.nft = myAddress();
       self.owner = myAddress();
       self.flag = false;
     }
   }
   get fun time(): Int {
+    if (self.time_lost == 0){
+      return 0;
+    }
     return self.time_lost - now();
   }
   get fun nft(): Address? {
