@@ -111,7 +111,7 @@ contract Task4 with Deployable {
         to: sender(),
         bounce: true,
         value: ton("0.01"),
-        mode: SendRemainingValue,
+        mode: SendRemainingBalance,
         body: Transfer{
           queryId: 0,
           newOwner: self.owner,
@@ -135,7 +135,7 @@ contract Task4 with Deployable {
   }
 
   get fun nft(): Address? {
-    return 0;
+    return null;
   }
 
   get fun owner(): Address? {
