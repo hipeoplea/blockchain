@@ -130,6 +130,9 @@ contract Task4 with Deployable {
     return self.nft;
   }
   get fun owner(): Address? {
+    if (self.owner == myAddress()){
+      return null;
+    }
     return self.owner;
   }
 }
