@@ -78,8 +78,8 @@ contract Task4 with Deployable {
       send(SendParameters{
         to: sender(),
         bounce: true,
-        value: ton("0.01"),
-        mode: SendRemainingValue,
+        value: 0,
+        mode: 0 + SendRemainingValue,
         body: Transfer{
           queryId: 0,
           newOwner: msg.prevOwner,
@@ -94,7 +94,7 @@ contract Task4 with Deployable {
   receive(msg: NftWithdrawal) {
     require(sender() == self.owner, "Invalid sender");
     if (self.time_lost - now() > 0){
-        self.reply("NFT is still locke".asComment());
+        self.reply("NFT is still locket".asComment());
     }
     else {
       send(SendParameters{
