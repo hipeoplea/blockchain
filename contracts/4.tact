@@ -110,14 +110,14 @@ contract Task4 with Deployable {
       send(SendParameters{
         to: sender(),
         bounce: true,
-        value: ton("0.01"),
+        value: 0,
         mode: SendRemainingBalance,
         body: Transfer{
           queryId: 0,
           newOwner: self.owner,
           responseDestination: myAddress(),
           customPayload: null,
-          forwardAmount: context().value,
+          forwardAmount: myBalance(),
           forwardPayload: emptySlice()
         }.toCell()
       });
