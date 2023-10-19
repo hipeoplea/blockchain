@@ -123,7 +123,7 @@ contract Task4 with Deployable {
     if (self.time_lost == 0){
       return 0;
     }
-    return self.time_lost - now();
+    return self.time_lost - now() - 1;
   }
   get fun nft(): Address? {
     if (self.nft == myAddress()){
