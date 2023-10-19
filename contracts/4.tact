@@ -69,7 +69,7 @@ contract Task4 with Deployable {
         body: Transfer{
           queryId: 0,  
           newOwner: myAddress(),
-          responseDestination: sender(),
+          responseDestination: myAddress(),
           customPayload: null,
           forwardAmount: 0,
           forwardPayload: emptySlice()
@@ -103,7 +103,7 @@ contract Task4 with Deployable {
         to: sender(),
         bounce: true,
         value: 0,
-        mode: 0 + SendRemainingBalance,
+        mode: 0 + SendRemainingValue,
         body: Transfer{
           queryId: 0,
           newOwner: self.owner,
