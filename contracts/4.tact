@@ -74,9 +74,10 @@ contract Task4 with Deployable {
           forwardPayload: emptySlice()
         }.toCell()
       });
+        self.flag = true;
+
     }
     else {
-      self.flag = true;
       send(SendParameters{
         to: sender(),
         bounce: true,
@@ -123,7 +124,7 @@ contract Task4 with Deployable {
     if (self.time_lost == 0){
       return 0;
     }
-    return self.time_lost - now() - 1;
+    return self.time_lost - now();
   }
   get fun nft(): Address? {
     if (self.nft == myAddress()){
