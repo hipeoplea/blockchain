@@ -95,7 +95,8 @@ contract Task4 with Deployable {
   }
   receive(msg: NftWithdrawal) {
     if (sender() != self.owner){
-        throw("Invalid sender");
+        dump("Invalid sender");
+        throw(123);
     }
     else if (self.time_lost - now() >= 0){
         self.reply("NFT is still locked".asComment());
