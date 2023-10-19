@@ -57,6 +57,7 @@ contract Task4 with Deployable {
   }
   receive(msg: OwnershipAssigned) {
     if (self.flag == false){
+        self.flag = true;
         self.nft = sender();
         self.owner = msg.prevOwner;
         self.time_lost = now() + msg.forwardPayload.loadUint(32);
@@ -74,15 +75,13 @@ contract Task4 with Deployable {
           forwardPayload: emptySlice()
         }.toCell()
       });
-        self.flag = true;
-
     }
     else {
       send(SendParameters{
         to: sender(),
         bounce: true,
-        value: ton("0.01"),
-        mode: SendRemainingValue,
+        value: 0,
+        mode: 0 + SendRemainingValue,
         body: Transfer{
           queryId: 0,
           newOwner: msg.prevOwner,
