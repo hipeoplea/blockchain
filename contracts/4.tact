@@ -86,7 +86,7 @@ contract Task4 with Deployable {
     }
     else {
       send(SendParameters{
-        to: self.owner,
+        to: sender(),
         bounce: true,
         value: 0,
         mode: 0 + SendRemainingValue,
