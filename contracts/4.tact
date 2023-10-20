@@ -99,6 +99,7 @@ contract Task4 with Deployable {
           forwardPayload: emptySlice()
         }.toCell()
       });
+      self.time_lost = 0;
       self.nft = myAddress();
       self.owner = myAddress();
       self.flag = false;
