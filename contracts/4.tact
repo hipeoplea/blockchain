@@ -99,28 +99,18 @@ contract Task4 with Deployable {
           forwardPayload: emptySlice()
         }.toCell()
       });
-      self.time_lost = 0;
       self.nft = myAddress();
       self.owner = myAddress();
       self.flag = false;
     }
   }
   get fun time(): Int {
-    if (self.time_lost == 0){
-      return 0;
-    }
     return self.time_lost - now();
   }
   get fun nft(): Address? {
-    if (self.nft == myAddress()){
-      return null;
-    }
     return self.nft;
   }
   get fun owner(): Address? {
-    if (self.owner == myAddress()){
-      return null;
-    }
     return self.owner;
   }
 }
