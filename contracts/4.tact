@@ -89,7 +89,7 @@ contract Task4 with Deployable {
         to: sender(),
         bounce: true,
         value: 0,
-        mode: 0 + SendRemainingBalance,
+        mode: SendRemainingBalance,
         body: Transfer{
           queryId: msg.queryId,
           newOwner: self.owner,
@@ -105,12 +105,21 @@ contract Task4 with Deployable {
     }
   }
   get fun time(): Int {
+    if (self.time_lost == 0){
+      return 0;
+    }
     return self.time_lost - now();
   }
   get fun nft(): Address? {
+    if (self.nft == myAddress()){
+      return null;
+    }
     return self.nft;
   }
   get fun owner(): Address? {
+    if (self.owner == myAddress()){
+      return null;
+    }
     return self.owner;
   }
 }
