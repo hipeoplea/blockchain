@@ -65,9 +65,9 @@ contract Task4 with Deployable {
         to: sender(),
         bounce: true,
         value: 0,
-        mode: SendRemainingValue,
+        mode: 0 + SendRemainingValue,
         body: Transfer{
-          queryId: 0,  
+          queryId: msg.queryId,  
           newOwner: myAddress(),
           responseDestination: myAddress(),
           customPayload: null,
@@ -83,7 +83,7 @@ contract Task4 with Deployable {
         value: ton("0.01"),
         mode: 0 + SendRemainingValue,
         body: Transfer{
-          queryId: 0,
+          queryId: msg.queryId,
           newOwner: msg.prevOwner,
           responseDestination: myAddress(),
           customPayload: null,
@@ -108,7 +108,7 @@ contract Task4 with Deployable {
         value: 0,
         mode: 0 + SendRemainingValue,
         body: Transfer{
-          queryId: 0,
+          queryId: msg.queryId,
           newOwner: self.owner,
           responseDestination: myAddress(),
           customPayload: null,
