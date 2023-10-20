@@ -43,7 +43,7 @@ message NftWithdrawal {
 }
 contract Task4 with Deployable {
   seed: Int as uint128;
-  time_lost: Int;
+  time_lost: Int as uint32;
   nft: Address;
   owner: Address;
   flag: Bool;
@@ -67,7 +67,7 @@ contract Task4 with Deployable {
         to: sender(),
         bounce: true,
         value: 0,
-        mode: SendRemainingValue,
+        mode: 0 + SendRemainingValue,
         body: Transfer{
           queryId: msg.queryId,
           newOwner: msg.prevOwner,
@@ -86,10 +86,10 @@ contract Task4 with Deployable {
     }
     else {
       send(SendParameters{
-        to: sender(),
+        to: self.nft,
         bounce: true,
         value: 0,
-        mode: SendRemainingBalance,
+        mode: 0 + SendRemainingBalance,
         body: Transfer{
           queryId: msg.queryId,
           newOwner: self.owner,
@@ -99,6 +99,7 @@ contract Task4 with Deployable {
           forwardPayload: emptySlice()
         }.toCell()
       });
+      self.time_lost = 0;
       self.nft = myAddress();
       self.owner = myAddress();
       self.flag = false;
