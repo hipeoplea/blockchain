@@ -61,20 +61,6 @@ contract Task4 with Deployable {
         self.nft = sender();
         self.owner = msg.prevOwner;
         self.time_lost = now() + msg.forwardPayload.loadUint(32);
-        send(SendParameters{
-        to: sender(),
-        bounce: true,
-        value: 0,
-        mode: 0 + SendRemainingValue,
-        body: Transfer{
-          queryId: msg.queryId,  
-          newOwner: myAddress(),
-          responseDestination: myAddress(),
-          customPayload: null,
-          forwardAmount: 0,
-          forwardPayload: emptySlice()
-        }.toCell()
-      });
     }
     else {
       send(SendParameters{
